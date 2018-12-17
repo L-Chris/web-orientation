@@ -1,0 +1,20 @@
+{
+  "name": "web-orientation",
+  "amdName": "web-orientation",
+  "version": "0.0.1",
+  "description": "detect device orientation",
+  "main": "dist/web-orientation.js",
+  "module": "dist/web-orientation.es.js",
+  "jsnext:main": "dist/web-orientation.es.js",
+  "umd:main": "dist/web-orientation.umd.js",
+  "repository": "https://github.com/L-Chris/web-orientation",
+  "author": "L-Chris <563303226@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && microbundle --external all"
+  },
+  "devDependencies": {
+    "microbundle": "^0.8.3",
+    "rimraf": "^2.6.2"
+  }
+}
