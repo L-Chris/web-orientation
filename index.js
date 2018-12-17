@@ -1,14 +1,14 @@
 const ORIENTATION_LANDSCAPE = 'landscape'
 const ORIENTATION_PORTRAIT = 'portrait'
 
-const debouce = function(func, delay) {
+const debouce = function (func, delay) {
   let timer = null
   return function () {
     const context = this
     const args = arguments
     clearTimeout(timer)
     timer = setTimeout(function () {
-      func.apply(context,args)
+      func.apply(context, args)
     }, delay)
   }
 }
@@ -17,7 +17,7 @@ class Orientation {
   constructor () {
     this.type = null
 
-    this.bind()
+    this.init()
   }
 
   get isLandscape () {
@@ -28,6 +28,11 @@ class Orientation {
     return this.type === ORIENTATION_PORTRAIT
   }
 
+  init () {
+    this.bind()
+    this.get()
+  }
+
   bind () {
     const initResizeEvent = debouce(() => {
       this.get()
@@ -36,7 +41,7 @@ class Orientation {
   }
 
   get () {
-    const data = localStorage.getItem('web-orientation')
+    let data = localStorage.getItem('web-orientation')
     const { clientWidth, clientHeight } = document.documentElement
     let screenWidth = 0
     let screenHeight = 0
@@ -47,10 +52,12 @@ class Orientation {
       screenHeight = Math.max(width, height)
       localStorage.setItem('web-orientation', `${screenWidth},${screenHeight}`)
     } else {
-      ([screenWidth, screenHeight] = data.split(','));
+      data = data.split(',')
+      screenWidth = Number(data[0])
+      screenHeight = Number(data[1])
     }
 
-    this.type = clientWidth === screenWidth ? ORIENTATION_LANDSCAPE : ORIENTATION_PORTRAIT
+    this.type = clientWidth === screenWidth ? ORIENTATION_PORTRAIT : ORIENTATION_LANDSCAPE
     return this.type
   }
 }

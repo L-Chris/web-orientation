@@ -1,7 +1,7 @@
 {
   "name": "web-orientation",
   "amdName": "web-orientation",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "detect device orientation",
   "main": "dist/web-orientation.js",
   "module": "dist/web-orientation.es.js",
